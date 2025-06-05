@@ -5,11 +5,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-@EnableDiscoveryClient
 public class ApigatewayServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ApigatewayServiceApplication.class, args);
+    }
+
+    @Bean
+    public RouteLocator customRoutes(RouteLocatorBuilder builder) {
+        return builder.routes()
+                .route("course_service", r -> r.path("/course/**")
+                        .uri("lb://course-service"))
+                .build();
     }
 
 }

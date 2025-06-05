@@ -4,6 +4,3 @@ server:
 spring:
   application:
     name: course-service
-
-example:
-  message: Hello from local config!
