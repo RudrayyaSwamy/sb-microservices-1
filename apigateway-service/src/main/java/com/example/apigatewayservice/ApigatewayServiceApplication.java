@@ -17,7 +17,7 @@ public class ApigatewayServiceApplication {
     @Bean
     public RouteLocator customRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("course_service", r -> r.path("/course/**")
+                .route("course-service", r -> r.path("/api/courses/**")
                         .uri("lb://course-service"))
                 .build();
     }
