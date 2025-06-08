@@ -6,21 +6,23 @@ spring:
     name: apigateway-service
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-      routes:
-        - id: course-service
-          uri: lb://course-service
-          predicates:
-            - Path=/course-service/**
-        - id: payment-service
-          uri: lb://payment-service
-          predicates:
-            - Path=/payment-service/**
+      server:
+        webflux:
+          discovery:
+            locator:
+              lower-case-service-id: true
+              enabled: true
+          routes:
+            - id: course-service
+              uri: lb://course-service
+              predicates:
+                        - Path=/api/courses/**
+            - id: payment-service
+              uri: lb://payment-service
+              predicates:
+              - Path=/api/payment/**
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-service:8761/eureka/
